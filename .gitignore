@@ -221,3 +221,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Agents
+.claude/
+.agents/
+
+# Git
+.gitconfig
+
+# Archify
+.archify/
