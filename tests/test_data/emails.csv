@@ -1,0 +1,9 @@
+,Subject,Message,Spam/Ham,Date
+1,Hello,How are you?,ham,2026-11-20
+2,Win a free iPhone!,Click here to claim your prize.,spam,2026-11-21
+3,Meeting Reminder,Don't forget our meeting tomorrow.,ham,2026-11-22
+4,Limited Time Offer,Get 50% off your next purchase.,spam,2026-11-23
+5,Lunch Plans,Are you free for lunch tomorrow?,ham,2026-11-23
+6,Congratulations!,You've won a $100 gift card.,spam,2026-11-23
+7,Dinner Plans,Let grap dinner tomorrow?,ham,2026-11-23
+8,Congratulations!,You've won a tour to Paris!,spam,2026-11-23
