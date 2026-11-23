@@ -26,3 +26,7 @@ class DatasetLoadingTest(unittest.TestCase):
         train_emails, test_emails = split_emails(emails, test_ratio=0.5, seed=42)
         self.assertEqual(len(train_emails), 4)
         self.assertEqual(len(test_emails), 4)
+
+    def test_enron_set_loading(self):
+        emails = load_emails("data/raw/enron_spam_data.csv")
+        self.assertEqual(len(emails), 33716)
