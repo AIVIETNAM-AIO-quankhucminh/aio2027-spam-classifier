@@ -1,7 +1,4 @@
 from spam_classifier.dataset.email_message import Email
-from spam_classifier.filters.always_not_spam_filter import AlwaysNotSpamFilter
-from spam_classifier.filters.word_score_filter import WordScoreFilter
-from spam_classifier.filters.naive_bayes_filter import NaiveBayesFilter
 import numpy as np
 
 class Evaluator:
@@ -14,11 +11,11 @@ class Evaluator:
 
     def evaluate(self, spam_filter) -> dict:
         """Run spam_filter.predict on every test email and return compute_metrics(...)."""
-        # Check if the spam_filter is not empty and is an instance of the expected classes
+        # Check if the spam_filter is not empty and has a predict method
         if spam_filter is None:
             raise ValueError("spam_filter cannot be None")
-        if not isinstance(spam_filter, (AlwaysNotSpamFilter, WordScoreFilter, NaiveBayesFilter)):
-            raise ValueError("Invalid spam filter for evaluation")
+        if not hasattr(spam_filter, 'predict') or not callable(getattr(spam_filter, 'predict')):
+            raise ValueError("spam_filter must have a callable 'predict' method")
 
         # Get predictions from the spam filter
         predicted = np.array([spam_filter.predict(email) for email in self.test_emails], dtype=bool)
@@ -43,12 +40,12 @@ class Evaluator:
         f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0.0
 
         return {
-            "accuracy": accuracy,
-            "precision": precision,
-            "recall": recall,
-            "f1": f1,
-            "tp": tp,
-            "fp": fp,
-            "fn": fn,
-            "tn": tn
+            "accuracy": float(accuracy),
+            "precision": float(precision),
+            "recall": float(recall),
+            "f1": float(f1),
+            "tp": int(tp),
+            "fp": int(fp),
+            "fn": int(fn),
+            "tn": int(tn)
         }
