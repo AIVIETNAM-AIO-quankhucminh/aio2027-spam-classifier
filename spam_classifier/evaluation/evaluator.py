@@ -11,9 +11,7 @@ class Evaluator:
 
     def evaluate(self, spam_filter) -> dict:
         """Run spam_filter.predict on every test email and return compute_metrics(...)."""
-        # Check if the spam_filter is not empty and has a predict method
-        if spam_filter is None:
-            raise ValueError("spam_filter cannot be None")
+        # Check if the spam_filter has a predict method
         if not hasattr(spam_filter, 'predict') or not callable(getattr(spam_filter, 'predict')):
             raise ValueError("spam_filter must have a callable 'predict' method")
 
@@ -30,7 +28,7 @@ class Evaluator:
         # Convert actual and predicted to numpy arrays of boolean type
         actual = np.array(actual, dtype=bool)
         predicted = np.array(predicted, dtype=bool)
-        
+
         # Calculate true positives, false positives, false negatives, and true negatives
         tp = np.sum(actual & predicted)
         fp = np.sum(~actual & predicted)
