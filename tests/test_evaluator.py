@@ -8,8 +8,8 @@ from spam_classifier.evaluation.evaluator import Evaluator
 
 class EvaluatorTest(unittest.TestCase):
     def test_metrics_match_sklearn(self):
-        actual = np.array([True, True, True, False, False])
-        predicted = np.array([True, False, True, True, False])
+        actual = [True, True, True, False, False]
+        predicted = [True, False, True, True, False]
 
         result = Evaluator([]).compute_metrics(actual, predicted)
 
@@ -23,8 +23,8 @@ class EvaluatorTest(unittest.TestCase):
         self.assertAlmostEqual(result["f1"], metrics.f1_score(actual, predicted))
 
     def test_no_spam_predicted_gives_zero_precision(self):
-        actual = np.array([True, False, False])
-        predicted = np.array([False, False, False])
+        actual = [True, False, False]
+        predicted = [False, False, False]
 
         result = Evaluator([]).compute_metrics(actual, predicted)
 

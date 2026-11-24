@@ -18,15 +18,19 @@ class Evaluator:
             raise ValueError("spam_filter must have a callable 'predict' method")
 
         # Get predictions from the spam filter
-        predicted = np.array([spam_filter.predict(email) for email in self.test_emails], dtype=bool)
+        predicted = [spam_filter.predict(email) for email in self.test_emails]
         # Compute and return the evaluation metrics
         return self.compute_metrics(self.actual, predicted)
 
-    def compute_metrics(self, actual: np.ndarray, predicted: np.ndarray) -> dict:
+    def compute_metrics(self, actual: list, predicted: list) -> dict:
         """Return a dict with accuracy, precision, recall, f1, tp, fp, fn and tn.
 
         Spam (True) is the positive class. If a division would be by 0, use 0.0.
         """
+        # Convert actual and predicted to numpy arrays of boolean type
+        actual = np.array(actual, dtype=bool)
+        predicted = np.array(predicted, dtype=bool)
+        
         # Calculate true positives, false positives, false negatives, and true negatives
         tp = np.sum(actual & predicted)
         fp = np.sum(~actual & predicted)
