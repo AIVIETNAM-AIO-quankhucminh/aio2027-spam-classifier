@@ -35,11 +35,12 @@ class WordScoreFilter:
     def calculate_word_score(self,email) -> list:
         """Return the list of pair of (word, word score) for known word. Return an empty list if no word is known"""
         email_words_list = self.preprocessor.tokenize(email)
-        score_list=[] 
-        for word in email_words_list:
+        words_set=set(email_words_list)
+        score_list = []
+        for word in words_set:
             s = self.spam_counts.get(word,0)
             h = self.normal_counts.get(word,0)
-            if s+h < self.min_count:
+            if s+h < self.min_count or (s+h)==0:
                 continue
             word_score = s/(s+h)
             score_list.append((word,word_score))
