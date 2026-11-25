@@ -6,8 +6,8 @@ class AlwaysNotSpamFilter:
 
     def fit(self, emails: list):
         """Nothing to learn."""
-        raise NotImplementedError
+        pass
 
     def predict(self, email) -> bool:
         """Always return False (not spam)."""
-        raise NotImplementedError
+        return False
