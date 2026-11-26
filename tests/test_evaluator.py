@@ -1,6 +1,7 @@
 import unittest
 
 from sklearn import metrics
+import numpy as np
 
 from spam_classifier.evaluation.evaluator import Evaluator
 
